@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import com.igorlucas.domain.Post;
 import com.igorlucas.domain.User;
 import com.igorlucas.dto.AuthorDTO;
+import com.igorlucas.dto.CommentDTO;
 import com.igorlucas.repository.PostRepository;
 import com.igorlucas.repository.UserRepository;
 
@@ -46,6 +47,15 @@ public class Instantiation implements CommandLineRunner{
 		maria.getPosts().addAll(Arrays.asList(post1, post2));
 		
 		userRepository.save(maria);
+		
+		CommentDTO c1 = new CommentDTO(null, "Boa viagem mano!", sdf.parse("21/03/2018"), new AuthorDTO(alex));
+		CommentDTO c2 = new CommentDTO(null, "Aproveite!", sdf.parse("22/03/2018"), new AuthorDTO(bob));
+		CommentDTO c3 = new CommentDTO(null, "Tenha um ótimo dia!", sdf.parse("25/03/2018"), new AuthorDTO(alex));
+		
+		post1.getComments().addAll(Arrays.asList(c1, c2));
+		post2.getComments().addAll(Arrays.asList(c3));
+		
+		postRepository.saveAll(Arrays.asList(post1, post2));
 		
 	}
 
